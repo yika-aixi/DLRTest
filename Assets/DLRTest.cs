@@ -8,6 +8,8 @@ using Microsoft.Scripting.Hosting;
 using System;
 using System.Collections;
 using System.IO;
+using System.Reflection;
+using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,7 +40,7 @@ namespace Icarus.DLR.Test
         private dynamic _script;
         private ScriptRuntimeSetup _setup;
         private ScriptRuntime _scriptruntim;
-
+        private ScriptSource _source;
         /// <summary>
         /// 主要函数 --- 哔哔哔
         /// </summary>
@@ -63,6 +65,7 @@ namespace Icarus.DLR.Test
 
             try
             {
+                _scriptruntim.LoadAssembly(Assembly.GetAssembly(typeof(GameObject)));
                 _script = _scriptruntim.UseFile(_getPyPath(_getPersistentDataPath()));
                 _ex += "\n 加载脚本成功";
             }
@@ -164,6 +167,7 @@ namespace Icarus.DLR.Test
                 if (File.Exists(des))
                 {
                     _ex += "\n 文件存在,跳过";
+                    yield break;
                 }
                 FileStream fsDes = File.Create(des);
                 _ex += "\n 文件创建完成,开始写入";
