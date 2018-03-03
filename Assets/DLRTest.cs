@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Reflection;
-using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -64,26 +63,26 @@ namespace Icarus.DLR.Test
             {
                 InputField.text = _ex;
             }
-//            try
-//            {
-//                //_assembly = Assembly.GetAssembly(typeof(GameObject));
-//                //_scriptruntim.LoadAssembly(_assembly);
-//                //_ex += "\n 加载UnityEngine到ScriptRunTime成功,路径:\n \t" + _assembly.CodeBase;
-//
-//                _assembly = Assembly.GetAssembly(typeof(tt));
-//                _scriptruntim.LoadAssembly(_assembly);
-//                
-//                _ex += "\n 加载Icarus.DLR.Test到ScriptRunTime成功,路径:\n \t" + _assembly.CodeBase;
-//
-//            }
-//            catch (Exception e)
-//            {
-//                _ex += "\n 加载UnityEngine到ScriptRunTime失败,ex:"+e;
-//            }
-//            finally
-//            {
-//                InputField.text = _ex;
-//            }
+            //            try
+            //            {
+            //                //_assembly = Assembly.GetAssembly(typeof(GameObject));
+            //                //_scriptruntim.LoadAssembly(_assembly);
+            //                //_ex += "\n 加载UnityEngine到ScriptRunTime成功,路径:\n \t" + _assembly.CodeBase;
+            //
+            //                _assembly = Assembly.GetAssembly(typeof(tt));
+            //                _scriptruntim.LoadAssembly(_assembly);
+            //                
+            //                _ex += "\n 加载Icarus.DLR.Test到ScriptRunTime成功,路径:\n \t" + _assembly.CodeBase;
+            //
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                _ex += "\n 加载UnityEngine到ScriptRunTime失败,ex:"+e;
+            //            }
+            //            finally
+            //            {
+            //                InputField.text = _ex;
+            //            }
             try
             {
                 _script = _scriptruntim.UseFile(_getPyPath(_getPersistentDataPath()));
@@ -105,7 +104,7 @@ namespace Icarus.DLR.Test
                 ButtonObj.gameObject.SetActive(true);
                 foreach (var ces in _script.clr.References)
                 {
-                    Debug.LogError(ces);   
+                    _ex += "\n 程序集:"+ces;
                 }
                 
             }
@@ -165,12 +164,7 @@ namespace Icarus.DLR.Test
         {
             return Application.streamingAssetsPath;
         }
-
-        private string _getConfigPath(string root)
-        {
-            return Path.Combine(root, ConfigName);
-        }
-
+        
         private string _getPyPath(string root)
         {
             return Path.Combine(root, PyName);
