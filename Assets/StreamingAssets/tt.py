@@ -8,7 +8,6 @@ clr.AddReference("Assembly-CSharp")
 from UnityEngine import *
 from Icarus.DLR.Test import tt
 test="Hello Wrold!"
-#test=UnityEngine.GameObject
 
 def SetColor(image,color):
 	image.color = color
