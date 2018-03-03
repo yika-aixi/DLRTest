@@ -250,6 +250,12 @@
     <Reference Include="IronPython">
       <HintPath>Assets/Plugin/IronPython.2.7.8.1/lib/net45/IronPython.dll</HintPath>
     </Reference>
+    <Reference Include="IronPython.Modules">
+      <HintPath>Assets/Plugin/IronPython.2.7.8.1/lib/net45/IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.SQLite">
+      <HintPath>Assets/Plugin/IronPython.2.7.8.1/lib/net45/IronPython.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Scripting.Metadata">
       <HintPath>Assets/Plugin/IronPython.2.7.8.1/lib/net45/Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
@@ -275,6 +281,8 @@
   <ItemGroup>
     <None Include="Assets\Plugin\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Dynamic.xml" />
     <None Include="Assets\Plugin\DynamicLanguageRuntime.1.2.1\lib\net45\Microsoft.Scripting.xml" />
+    <None Include="Assets\Plugin\IronPython.2.7.8.1\lib\net45\IronPython.Modules.xml" />
+    <None Include="Assets\Plugin\IronPython.2.7.8.1\lib\net45\IronPython.SQLite.xml" />
     <None Include="Assets\Plugin\IronPython.2.7.8.1\lib\net45\IronPython.xml" />
     <None Include="Assets\Plugin\IronPython.2.7.8.1\lib\net45\Microsoft.Scripting.Metadata.xml" />
     <None Include="Assets\Resources\Script.xml" />

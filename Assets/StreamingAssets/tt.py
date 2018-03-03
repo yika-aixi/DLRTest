@@ -1,8 +1,19 @@
 #!/usr/bin/python
-import UnityEngine
+#import sys,UnityEngine
+#from Icarus.DLR.Test import tt
+import sys,clr
+
+clr.AddReference("UnityEngine.CoreModule")
+clr.AddReference("Assembly-CSharp")
+from UnityEngine import *
+from Icarus.DLR.Test import tt
 test="Hello Wrold!"
-	
+#test=UnityEngine.GameObject
+
 def SetColor(image,color):
 	image.color = color
-	newobj = UnityEngine.Resources.Load("Script");
+	tt.Test(image)
+	newobj = GameObject("newc")
+	newobj = Resources.Load[TextAsset]("Script");
 	return newobj.text
+	

@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Icarus.DLR.Test
 {
@@ -41,6 +42,7 @@ namespace Icarus.DLR.Test
         private ScriptRuntimeSetup _setup;
         private ScriptRuntime _scriptruntim;
         private ScriptSource _source;
+        private Assembly _assembly;
         /// <summary>
         /// 主要函数 --- 哔哔哔
         /// </summary>
@@ -62,10 +64,28 @@ namespace Icarus.DLR.Test
             {
                 InputField.text = _ex;
             }
-
+//            try
+//            {
+//                //_assembly = Assembly.GetAssembly(typeof(GameObject));
+//                //_scriptruntim.LoadAssembly(_assembly);
+//                //_ex += "\n 加载UnityEngine到ScriptRunTime成功,路径:\n \t" + _assembly.CodeBase;
+//
+//                _assembly = Assembly.GetAssembly(typeof(tt));
+//                _scriptruntim.LoadAssembly(_assembly);
+//                
+//                _ex += "\n 加载Icarus.DLR.Test到ScriptRunTime成功,路径:\n \t" + _assembly.CodeBase;
+//
+//            }
+//            catch (Exception e)
+//            {
+//                _ex += "\n 加载UnityEngine到ScriptRunTime失败,ex:"+e;
+//            }
+//            finally
+//            {
+//                InputField.text = _ex;
+//            }
             try
             {
-                _scriptruntim.LoadAssembly(Assembly.GetAssembly(typeof(GameObject)));
                 _script = _scriptruntim.UseFile(_getPyPath(_getPersistentDataPath()));
                 _ex += "\n 加载脚本成功";
             }
@@ -78,12 +98,16 @@ namespace Icarus.DLR.Test
             {
                 InputField.text = _ex;
             }
-
             try
             {
                 _ex += "\n 获取变量 test:" + _script.test;
                 _ex += "\n 脚本执行结束";
                 ButtonObj.gameObject.SetActive(true);
+                foreach (var ces in _script.clr.References)
+                {
+                    Debug.LogError(ces);   
+                }
+                
             }
             catch (Exception e)
             {
@@ -102,10 +126,17 @@ namespace Icarus.DLR.Test
         /// </summary>
         public void SetColor()
         {
-            var color = _script.SetColor(Image,
-                new Color(UnityEngine.Random.Range(0, 1.1f), UnityEngine.Random.Range(0, 1.1f),
-                    UnityEngine.Random.Range(0, 1.1f), UnityEngine.Random.Range(0, 1.1f)));
-            InputField.text = "SetColor函数返回值:" + color.ToString();
+            try
+            {
+                var color = _script.SetColor(Image,
+                    new Color(Random.Range(0, 1.1f), Random.Range(0, 1.1f),
+                        Random.Range(0, 1.1f), Random.Range(0, 1.1f)));
+                InputField.text = "SetColor函数返回值:" + color.ToString();
+            }
+            catch (Exception e)
+            {
+                InputField.text = "调用SetColor函数出错:" + e;
+            }
         }
 
         /// <summary>
@@ -184,5 +215,13 @@ namespace Icarus.DLR.Test
 
         
 
+    }
+
+    public class tt
+    {
+        public static void Test(Image image)
+        {
+            image.color = Color.red;
+        }
     }
 }
